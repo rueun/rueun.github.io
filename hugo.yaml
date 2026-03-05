@@ -1,0 +1,32 @@
+baseURL: https://rueun.github.io/
+title: Rueun's Blog
+theme: hugo-book
+
+disablePathToLower: true
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  tableOfContents:
+    startLevel: 1
+  highlight:
+    style: base16-snazzy
+
+menu:
+  after:
+    - name: "Github"
+      url: "https://github.com/rueun"
+      weight: 10
+
+params:
+  BookTheme: "light"
+  BookToC: true
+  BookSearch: true
+  BookSection: docs
+  BookDateFormat: "January 2, 2006"
+  BookComments: false
+
+  BookMenu:
+    profileImage: "https://avatars.githubusercontent.com/u/64256409"
+    githubLink: "https://github.com/rueun"
