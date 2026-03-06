@@ -1,0 +1,69 @@
+// =====================
+// Mobile responsive
+// =====================
+@media screen and (max-width: $mobile-breakpoint) {
+  .book-page {
+    padding: 3.5rem 5rem;
+  }
+
+  .post-summary {
+    display: none;
+  }
+
+  .post-summary-mobile {
+    display: block;
+  }
+
+  .post-cover .post-cover-img {
+    width: 160px;
+    height: 160px;
+  }
+
+  .post-prev-next {
+    flex-direction: column;
+
+    .post-nav-card {
+      min-height: 5rem;
+      justify-content: center;
+    }
+  }
+
+  .post-header-title {
+    font-size: $font-size-24;
+  }
+
+  // Floating nav: hidden by default, toggle with + button
+  .floating-nav {
+    display: none;
+    bottom: 5rem;
+    right: 1.3rem;
+
+    &.open {
+      display: flex;
+    }
+  }
+
+  .floating-toggle {
+    display: flex;
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.0rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background: var(--color-link);
+    color: white;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    z-index: 51;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+
+    &.open {
+      transform: rotate(45deg);
+    }
+  }
+}
