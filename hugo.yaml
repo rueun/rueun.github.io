@@ -36,7 +36,7 @@ params:
   BookSearch: true
   BookSection: docs
   BookDateFormat: "January 2, 2006"
-  BookComments: true
+  BookComments: false
 
   BookMenu:
     profileImage: "https://avatars.githubusercontent.com/u/64256409"
