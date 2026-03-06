@@ -4,6 +4,7 @@ date: 2026-03-03
 description: "Java 프로그래밍 언어의 기본 개념과 문법을 정리한 글입니다. 변수, 자료형, 제어문 등을 다룹니다."
 categories:
   - Development
+  - Java
 tags:
   - Java
   - Programming

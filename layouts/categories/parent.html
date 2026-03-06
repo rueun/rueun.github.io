@@ -10,7 +10,7 @@
 
     {{ if eq $currentCategory $pageCategory }}
       {{ $pages = $pages | append . }}
-      {{ $subCategory := partial "categories/value-second" .Params.categories }}
+      {{ $subCategory := partial "categories/value-second" .Params.categories | printf "%s" }}
       {{ if $subCategory }}
         {{ $count := default 0 (index $subCategoryMap $subCategory) }}
         {{ $subCategoryMap = $subCategoryMap | merge (dict $subCategory (add $count 1)) }}

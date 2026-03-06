@@ -4,6 +4,7 @@ date: 2026-03-05
 description: "Spring Boot로 웹 애플리케이션을 시작하는 방법을 소개합니다. 프로젝트 생성부터 간단한 API 구현까지 다룹니다."
 categories:
   - Development
+  - Spring
 tags:
   - Spring Boot
   - Java
