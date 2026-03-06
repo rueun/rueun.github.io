@@ -1,4 +1,5 @@
 {{ if eq .Section "posts" }}
+{{ if .Params.series }}<div id="series-anchor"></div>{{ end }}
 <div class="post-header">
   {{ if .Params.categories }}
   <div class="post-header-categories">

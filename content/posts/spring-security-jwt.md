@@ -1,6 +1,7 @@
 ---
 title: "Spring Security + JWT 인증 구현하기"
 date: 2026-03-02
+series: "Spring Boot 완전 정복"
 description: "Spring Security와 JWT를 활용하여 토큰 기반 인증을 구현합니다. Access Token과 Refresh Token 전략을 다룹니다."
 categories:
   - Development
@@ -12,6 +13,8 @@ tags:
   - Authentication
   - Backend
 ---
+
+{{< series "Spring Boot 완전 정복" >}}
 
 ## JWT란?
 

@@ -1,6 +1,7 @@
 ---
 title: "Spring Boot 예외 처리 전략 - @ExceptionHandler와 @ControllerAdvice"
 date: 2026-03-04
+series: "Spring Boot 완전 정복"
 description: "Spring Boot에서 전역 예외 처리를 구현하는 방법을 정리합니다. 커스텀 예외와 에러 응답 표준화를 다룹니다."
 categories:
   - Development
@@ -11,6 +12,8 @@ tags:
   - REST API
   - Backend
 ---
+
+{{< series "Spring Boot 완전 정복" >}}
 
 ## 예외 처리가 중요한 이유
 

@@ -1,6 +1,7 @@
 ---
 title: "Spring Boot 시작하기"
 date: 2026-03-05
+series: "Spring Boot 완전 정복"
 cover: "https://dl.dropboxusercontent.com/scl/fi/w0zho4wlgq6m8db5mvn9k/hugo-00-cover.webp?rlkey=et2tlzgb0h6blgf8klzbqjxem&raw=1"
 description: "Spring Boot로 웹 애플리케이션을 시작하는 방법을 소개합니다. 프로젝트 생성부터 간단한 API 구현까지 다룹니다."
 summary: |
@@ -16,6 +17,8 @@ tags:
   - Java
   - Backend
 ---
+
+{{< series "Spring Boot 완전 정복" >}}
 
 ## Spring Boot란?
 
