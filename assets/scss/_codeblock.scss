@@ -79,16 +79,23 @@
     border-radius: 12px;
   }
 
-  // Table layout (line numbers)
+  // Kill ALL table borders/outlines aggressively
+  table, thead, tbody, tr, td, th {
+    border: none !important;
+    border-spacing: 0 !important;
+    border-collapse: collapse !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
   table {
     width: 100%;
-    border-collapse: collapse;
-    border: none !important;
   }
 
   td {
-    border: none !important;
     padding: 0 !important;
+    vertical-align: top;
   }
 
   pre {
@@ -98,11 +105,15 @@
     border-radius: 0 !important;
   }
 
-  // Line number column
+  // Line number column - completely unselectable
   td:first-child {
     width: 1px;
     white-space: nowrap;
-    user-select: none;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    pointer-events: none;
 
     pre {
       padding-right: 0 !important;
@@ -110,13 +121,16 @@
 
     code, code span {
       color: rgba(255, 255, 255, 0.25) !important;
-      user-select: none;
+      -webkit-user-select: none !important;
+      user-select: none !important;
     }
   }
 
-  // Code column - click to select all
-  td:last-child pre {
-    padding-left: $padding-4 !important;
+  // Code column
+  td:last-child {
+    pre {
+      padding-left: $padding-4 !important;
+    }
 
     code {
       cursor: pointer;
@@ -128,7 +142,7 @@
 .markdown pre:not(.highlight pre) {
   position: relative;
   padding-top: 2.5rem !important;
-  border-radius: 8px;
+  border-radius: 12px;
 
   &::before {
     content: '';
