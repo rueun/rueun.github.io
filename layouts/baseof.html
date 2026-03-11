@@ -52,21 +52,27 @@
     <i class="fa-solid fa-plus"></i>
   </button>
 
-  <!-- Code block: toolbar (copy + lang) + click to select -->
+  <!-- Code block: wrap in container + toolbar + click to select -->
   <script>
   (function() {
-    document.querySelectorAll('.highlight').forEach(function(block) {
+    document.querySelectorAll('.markdown .highlight').forEach(function(highlight) {
       // Detect language
-      var codeEl = block.querySelector('code[class*="language-"]');
+      var codeEl = highlight.querySelector('code[class*="language-"]');
       var lang = '';
       if (codeEl) {
         var match = (codeEl.className || '').match(/language-(\w+)/);
         if (match) lang = match[1];
       }
 
-      // Create toolbar
-      var toolbar = document.createElement('div');
-      toolbar.className = 'code-toolbar';
+      // Create wrapper: .codeblock-wrap > .code-actions + .highlight
+      var wrapper = document.createElement('div');
+      wrapper.className = 'codeblock-wrap';
+      if (lang && lang !== 'fallback') wrapper.setAttribute('data-lang', lang);
+      highlight.parentNode.insertBefore(wrapper, highlight);
+
+      // Create actions bar
+      var actions = document.createElement('div');
+      actions.className = 'code-actions';
 
       // Copy button
       var btn = document.createElement('button');
@@ -74,7 +80,8 @@
       btn.innerHTML = '<i class="fa-regular fa-copy"></i> COPY';
       btn.addEventListener('click', function(e) {
         e.stopPropagation();
-        var code = block.querySelector('td:last-child code') || block.querySelector('pre code') || block.querySelector('code');
+        e.preventDefault();
+        var code = highlight.querySelector('td:last-child code') || highlight.querySelector('pre code');
         if (!code) return;
         var text = code.innerText || code.textContent;
         navigator.clipboard.writeText(text).then(function() {
@@ -86,53 +93,35 @@
           }, 2000);
         });
       });
-      toolbar.appendChild(btn);
+      actions.appendChild(btn);
 
       // Language label
       if (lang && lang !== 'fallback') {
         var langLabel = document.createElement('span');
         langLabel.className = 'code-lang-label';
         langLabel.textContent = lang.toUpperCase();
-        toolbar.appendChild(langLabel);
+        actions.appendChild(langLabel);
       }
 
-      // Insert toolbar inside the scrollable div
-      var inner = block.querySelector('div');
-      if (inner) {
-        inner.insertBefore(toolbar, inner.firstChild);
-      } else {
-        block.insertBefore(toolbar, block.firstChild);
-      }
+      wrapper.appendChild(actions);
+      wrapper.appendChild(highlight);
 
-      // Make line number td unselectable via JS (inline styles override CSS)
-      var lineNoTd = block.querySelector('td:first-child');
-      if (lineNoTd) {
-        lineNoTd.style.userSelect = 'none';
-        lineNoTd.style.webkitUserSelect = 'none';
-        lineNoTd.style.pointerEvents = 'none';
-      }
-
-      // Click anywhere in highlight to select all code
-      var codeContainer = block.querySelector('td:last-child pre code') || block.querySelector('pre code');
-      block.style.cursor = 'pointer';
-      block.addEventListener('click', function(e) {
-        // Skip if clicking toolbar
-        if (e.target.closest('.code-toolbar')) return;
-        if (!codeContainer) return;
-        var range = document.createRange();
-        range.selectNodeContents(codeContainer);
-        var sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
+      // Make line numbers unselectable
+      highlight.querySelectorAll('td:first-child, td:first-child *').forEach(function(el) {
+        el.style.userSelect = 'none';
+        el.style.webkitUserSelect = 'none';
+        el.style.pointerEvents = 'none';
       });
 
-      // Prevent drag selection inside code block
-      block.addEventListener('mousedown', function(e) {
-        if (e.target.closest('.code-toolbar')) return;
+      // Click wrapper to select all code, prevent drag
+      var codeTarget = highlight.querySelector('td:last-child code') || highlight.querySelector('pre code');
+
+      wrapper.addEventListener('mousedown', function(e) {
+        if (e.target.closest('.code-actions')) return;
         e.preventDefault();
-        if (!codeContainer) return;
+        if (!codeTarget) return;
         var range = document.createRange();
-        range.selectNodeContents(codeContainer);
+        range.selectNodeContents(codeTarget);
         var sel = window.getSelection();
         sel.removeAllRanges();
         sel.addRange(range);

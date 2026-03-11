@@ -1,9 +1,12 @@
 // =====================
 // Code block - Mac style UI
 // =====================
-.markdown .highlight {
+.codeblock-wrap {
   position: relative;
   margin: $padding-16 0;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
 
   // Mac window dots
   &::before {
@@ -20,122 +23,116 @@
     z-index: 2;
   }
 
-  // Top-right toolbar (language + copy), sticky
-  .code-toolbar {
-    position: sticky;
-    top: 0;
-    float: right;
+  // Actions bar (copy + lang)
+  .code-actions {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
     z-index: 2;
     display: flex;
     gap: $padding-4;
-    padding: 0.5rem 0.5rem 0 0;
-
-    .code-copy-btn {
-      padding: $padding-4 $padding-8;
-      background: rgba(255, 255, 255, 0.15);
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: $font-size-12;
-      color: rgba(255, 255, 255, 0.6);
-      transition: background 0.2s ease;
-      white-space: nowrap;
-
-      i {
-        margin-right: 2px;
-      }
-
-      &:hover {
-        background: rgba(255, 255, 255, 0.25);
-        color: white;
-      }
-
-      &.copied {
-        background: #28ca42;
-        color: white;
-      }
-    }
-
-    .code-lang-label {
-      padding: $padding-4 $padding-8;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-      font-size: $font-size-12;
-      color: rgba(255, 255, 255, 0.5);
-      text-transform: uppercase;
-      font-weight: 500;
-      white-space: nowrap;
-    }
   }
 
-  // Remove the ::after (language label moved to toolbar)
-  &::after {
-    display: none;
-  }
-
-  // Outer wrapper
-  > div {
-    overflow: hidden;
-    border-radius: 12px;
-  }
-
-  // Kill ALL table borders/outlines aggressively
-  table, thead, tbody, tr, td, th {
-    border: none !important;
-    border-spacing: 0 !important;
-    border-collapse: collapse !important;
-    outline: none !important;
-    box-shadow: none !important;
-    background: transparent !important;
-  }
-
-  table {
-    width: 100%;
-  }
-
-  td {
-    padding: 0 !important;
-    vertical-align: top;
-  }
-
-  pre {
-    padding-top: 2.5rem !important;
-    margin: 0 !important;
-    border: none !important;
-    border-radius: 0 !important;
-  }
-
-  // Line number column - completely unselectable
-  td:first-child {
-    width: 1px;
+  .code-copy-btn {
+    padding: $padding-4 $padding-8;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: $font-size-12;
+    color: rgba(255, 255, 255, 0.6);
+    transition: background 0.2s ease;
     white-space: nowrap;
-    -webkit-user-select: none !important;
-    -moz-user-select: none !important;
-    -ms-user-select: none !important;
-    user-select: none !important;
-    pointer-events: none;
+
+    i {
+      margin-right: 2px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.25);
+      color: white;
+    }
+
+    &.copied {
+      background: #28ca42;
+      color: white;
+    }
+  }
+
+  .code-lang-label {
+    padding: $padding-4 $padding-8;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    font-size: $font-size-12;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  // Highlight inner
+  .highlight {
+    margin: 0;
+
+    > div {
+      overflow-x: auto;
+    }
+
+    // Kill ALL table borders
+    table, thead, tbody, tr, td, th {
+      border: none !important;
+      border-spacing: 0 !important;
+      border-collapse: collapse !important;
+      outline: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    td {
+      padding: 0 !important;
+      vertical-align: top;
+    }
 
     pre {
-      padding-right: 0 !important;
+      padding-top: 2.5rem !important;
+      margin: 0 !important;
+      border: none !important;
+      border-radius: 0 !important;
     }
 
-    code, code span {
-      color: rgba(255, 255, 255, 0.25) !important;
+    // Line number column
+    td:first-child {
+      width: 1px;
+      white-space: nowrap;
       -webkit-user-select: none !important;
       user-select: none !important;
-    }
-  }
+      pointer-events: none;
 
-  // Code column
-  td:last-child {
-    pre {
+      pre {
+        padding-right: 0 !important;
+      }
+
+      code, code span {
+        color: rgba(255, 255, 255, 0.25) !important;
+      }
+    }
+
+    // Code column
+    td:last-child pre {
       padding-left: $padding-4 !important;
     }
-
-    code {
-      cursor: pointer;
-    }
   }
+}
+
+// Unwrapped highlights (fallback, shouldn't normally happen)
+.markdown .highlight:not(.codeblock-wrap .highlight) {
+  border-radius: 12px;
+  overflow: hidden;
+  margin: $padding-16 0;
 }
 
 // Non-highlighted code blocks (plain ```code```)
