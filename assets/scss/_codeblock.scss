@@ -30,12 +30,16 @@
     top: 0.5rem;
     right: 0.5rem;
     z-index: 3;
-    display: flex;
     gap: $padding-4;
+    display: flex;
+    align-items: center;
+    height: 1.5rem;
   }
 
   .code-copy-btn {
-    padding: $padding-4 $padding-8;
+    padding: 0 $padding-8;
+    height: 1.5rem;
+    line-height: 1.5rem;
     background: rgba(255, 255, 255, 0.15);
     border: none;
     border-radius: 6px;
@@ -61,7 +65,9 @@
   }
 
   .code-lang-label {
-    padding: $padding-4 $padding-8;
+    padding: 0 $padding-8;
+    height: 1.5rem;
+    line-height: 1.5rem;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 6px;
     font-size: $font-size-12;
@@ -81,6 +87,7 @@
       &::selection {
         background: transparent;
       }
+
       &::-moz-selection {
         background: transparent;
       }
@@ -89,6 +96,7 @@
     &::selection {
       background: transparent;
     }
+
     &::-moz-selection {
       background: transparent;
     }
