@@ -52,6 +52,53 @@
     <i class="fa-solid fa-plus"></i>
   </button>
 
+  <!-- Code block: language label + copy button -->
+  <script>
+  (function() {
+    document.querySelectorAll('.highlight').forEach(function(block) {
+      // Detect language from class
+      var codeEl = block.querySelector('code[class*="language-"]') || block.querySelector('code[data-lang]');
+      var lang = '';
+      if (codeEl) {
+        var cls = codeEl.className || '';
+        var match = cls.match(/language-(\w+)/);
+        if (match) lang = match[1];
+        if (!lang) lang = codeEl.getAttribute('data-lang') || '';
+      }
+      if (!lang) {
+        // Try from chroma class
+        var inner = block.querySelector('[class*="chroma"]');
+        if (inner) {
+          var classes = inner.className.split(' ');
+          classes.forEach(function(c) {
+            if (c !== 'chroma' && c.length > 0) lang = c;
+          });
+        }
+      }
+      if (lang) block.setAttribute('data-lang', lang);
+
+      // Copy button
+      var btn = document.createElement('button');
+      btn.className = 'code-copy-btn';
+      btn.textContent = 'COPY';
+      btn.addEventListener('click', function() {
+        var code = block.querySelector('td:last-child code') || block.querySelector('pre code') || block.querySelector('code');
+        if (!code) return;
+        var text = code.innerText || code.textContent;
+        navigator.clipboard.writeText(text).then(function() {
+          btn.textContent = 'COPIED';
+          btn.classList.add('copied');
+          setTimeout(function() {
+            btn.textContent = 'COPY';
+            btn.classList.remove('copied');
+          }, 2000);
+        });
+      });
+      block.appendChild(btn);
+    });
+  })();
+  </script>
+
   <script src="/fuse.min.js"></script>
   <!-- Search modal -->
   <div class="search-modal-overlay" id="search-modal-overlay">

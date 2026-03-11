@@ -1,0 +1,131 @@
+// =====================
+// Code block - Mac style UI
+// =====================
+.markdown .highlight {
+  position: relative;
+  margin: $padding-16 0;
+
+  // Mac window dots
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: #ff5f57;
+    border-radius: 50%;
+    box-shadow: 1.25rem 0 0 #ffbd2e, 2.5rem 0 0 #28ca42;
+    z-index: 1;
+  }
+
+  // Language label
+  &::after {
+    content: attr(data-lang);
+    position: absolute;
+    top: 0.6rem;
+    right: 3.5rem;
+    font-size: $font-size-12;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    z-index: 1;
+    font-weight: 500;
+  }
+
+  // Copy button
+  .code-copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: $padding-4 $padding-8;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: $border-radius;
+    cursor: pointer;
+    font-size: $font-size-12;
+    color: rgba(255, 255, 255, 0.5);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.2s ease, background 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+    }
+
+    &.copied {
+      background: #28ca42;
+      color: white;
+      opacity: 1;
+    }
+  }
+
+  &:hover .code-copy-btn {
+    opacity: 1;
+  }
+
+  // Outer wrapper
+  > div {
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  // Table layout (line numbers)
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none !important;
+  }
+
+  td {
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  pre {
+    padding-top: 2.5rem !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  // Line number column
+  td:first-child {
+    width: 1px;
+    white-space: nowrap;
+
+    pre {
+      padding-right: 0 !important;
+    }
+
+    code span {
+      color: rgba(255, 255, 255, 0.25) !important;
+    }
+  }
+
+  // Code column
+  td:last-child pre {
+    padding-left: $padding-4 !important;
+  }
+}
+
+// Non-highlighted code blocks (plain ```code```)
+.markdown pre:not(.highlight pre) {
+  position: relative;
+  padding-top: 2.5rem !important;
+  border-radius: 8px;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0.75rem;
+    left: 1rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    background: #ff5f57;
+    border-radius: 50%;
+    box-shadow: 1.25rem 0 0 #ffbd2e, 2.5rem 0 0 #28ca42;
+  }
+}

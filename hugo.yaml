@@ -17,6 +17,9 @@ markup:
     startLevel: 1
   highlight:
     style: base16-snazzy
+    lineNos: true
+    lineNumbersInTable: true
+    guessSyntax: true
 
 menu:
   after:
